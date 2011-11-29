@@ -1,3 +1,4 @@
+require 'active_record'
 require RUBY_VERSION >= '1.9' ? 'csv' : 'fastercsv'
 
 class Tabularasa
@@ -10,7 +11,7 @@ class Tabularasa
   end
 
   def to_csv
-    csv_data = CSV.generate(:col_sep => @delimiter) do |csv|
+    csv_data = @generator.generate(:col_sep => @delimiter) do |csv|
       csv << @headers
       @rows.each do |row|
         csv << collect(row)

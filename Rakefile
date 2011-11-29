@@ -8,7 +8,8 @@ Echoe.new('tabularasa', '0.2.1') do |p|
   p.author          = "Chris Rosario"
   p.email           = "callenrosario@gmail.com"
   p.ignore_pattern  = ["tmp/*", "script/*"]
-  p.runtime_dependencies = []
+  p.runtime_dependencies = ['activerecord']
+  p.runtime_dependencies << 'fastercsv' if RUBY_VERSION < '1.9'
   p.development_dependencies = []
 end
 
