@@ -1,14 +1,16 @@
-require 'csv'
+require RUBY_VERSION >= '1.9' ? 'csv' : 'fastercsv'
 
 class Tabularasa
   def initialize(rows, options = {}, &block)
+    @generator = RUBY_VERSION >= '1.9' ? CSV : FasterCSV
+    @delimiter = options[:delimiter] || ','
     @rows = rows
     @keys = (options[:only] || get_keys) - (options[:exclude] || [])
     @headers = options[:headers] || options[:only] || get_headers
   end
 
   def to_csv
-    csv_data = CSV.generate do |csv|
+    csv_data = CSV.generate(:col_sep => @delimiter) do |csv|
       csv << @headers
       @rows.each do |row|
         csv << collect(row)

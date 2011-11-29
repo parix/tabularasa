@@ -44,7 +44,7 @@ This simple gem gives you the ability to convert an array of activerecord and/or
 
 == Contributors
 
-* Chris Roasario
+* Chris Rosario
 
 
 Copyright (c) 2011 Chris Rosario, released under the MIT license
