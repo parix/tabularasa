@@ -1,0 +1,55 @@
+= tabularasa gem
+
+This simple gem gives you the ability to convert an array of activerecord and/or hash objects to tabular data.
+
+
+== Usage
+
+  @users = User.all
+
+  #
+  # defaults are export headers and all fields
+  #
+
+  @users.to_csv
+  @users.to_csv(:only => [:last_name, :role]) # This will also set the order
+  @users.to_csv(:headers => false)
+  @users.to_csv(:except => [:last_name, :role])
+
+
+== Real life example
+
+  class UserController < ApplicationController
+    def index
+      @users = User.all
+
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @users }
+        format.csv { send_data @users.to_csv }
+      end
+    end
+  end
+
+
+== Requirements
+
+  ruby >= 1.9
+
+
+== Install
+
+  gem install tabularasa
+
+
+== Note
+
+Does not work on a single activerecord, ie, Use.
+
+
+== Contributors
+
+* Chris Roasario
+
+
+Copyright (c) 2011 Chris Rosario, released under the MIT license
