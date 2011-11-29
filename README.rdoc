@@ -13,7 +13,7 @@ This simple gem gives you the ability to convert an array of activerecord and/or
 
   @users.to_csv
   @users.to_csv(:only => [:last_name, :role]) # This will also set the order
-  @users.to_csv(:headers => false)
+  @users.to_csv(:headers => ["Last Name", "Role"])
   @users.to_csv(:except => [:last_name, :role])
 
 
@@ -40,11 +40,6 @@ This simple gem gives you the ability to convert an array of activerecord and/or
 == Install
 
   gem install tabularasa
-
-
-== Note
-
-Does not work on a single activerecord, ie, Use.
 
 
 == Contributors
