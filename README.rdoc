@@ -1,6 +1,6 @@
 = tabularasa gem
 
-This simple gem gives you the ability to convert an array of activerecord and/or hash objects to tabular data.
+This simple gem gives you the ability to convert an array of activerecords, hashes, and/or arrays to tabular data.
 
 
 == Usage
@@ -13,6 +13,7 @@ This simple gem gives you the ability to convert an array of activerecord and/or
 
   @users.to_csv
   @users.to_csv(:only => [:last_name, :role]) # This will also set the order
+  @users.to_csv(:delimiter => ';') # This will set the delimiter between values in a row
   @users.to_csv(:headers => ["Last Name", "Role"])
   @users.to_csv(:except => [:last_name, :role])
 
@@ -32,9 +33,13 @@ This simple gem gives you the ability to convert an array of activerecord and/or
   end
 
 
-== Requirements
+== Dependencies
 
   ruby >= 1.9
+    * activerecord
+  ruby < 1.9
+    * activerecord
+    * fastercsv
 
 
 == Install
