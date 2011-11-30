@@ -1,16 +1,29 @@
+# encoding: UTF-8
 require 'rubygems'
-require 'echoe'
-
-Echoe.new('tabularasa', '0.2.1') do |p|
-  p.summary         = "Gives the ability to convert homogeneous activerecord and/or hash objects into csv"
-  p.description     = "This Rails gem gives you the ability to call to_csv to a collection of homogenous activerecords and/or hashes"
-  p.url             = "https://github.com/callenrosario/tabularasa"
-  p.author          = "Chris Rosario"
-  p.email           = "callenrosario@gmail.com"
-  p.ignore_pattern  = ["tmp/*", "script/*"]
-  p.runtime_dependencies = ['activerecord']
-  p.runtime_dependencies << 'fastercsv' if RUBY_VERSION < '1.9'
-  p.development_dependencies = []
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
 
-Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
+require 'rake'
+require 'rdoc/task'
+
+require 'rake/testtask'
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = false
+end
+
+task :default => :test
+
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = 'Test'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README.rdoc')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
