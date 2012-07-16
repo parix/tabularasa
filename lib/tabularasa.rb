@@ -34,7 +34,7 @@ class Tabularasa
     end
 
     def collect_active_record(object)
-      @keys.collect{|key| object[key]}
+      @keys.collect{|key| object[key] || object.key}
     end
 
     def collect_hash(object)
